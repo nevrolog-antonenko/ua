@@ -62,8 +62,6 @@ const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-
-        // Додаткова перевірка перед відправкою
         const formData = new FormData(this);
         fetch(this.action, {
             method: 'POST',
@@ -74,7 +72,7 @@ if (contactForm) {
         })
         .then(response => {
             if (response.ok) {
-                alert('Дякуємо за заявку! Ми зв’яжемося з вами найближчим часом.');
+                window.location.href = 'https://nevrolog-antonenko.github.io/ua/thanks.html'; // Редирект на кастомну сторінку
                 this.reset();
             } else {
                 throw new Error('Помилка при відправці');
