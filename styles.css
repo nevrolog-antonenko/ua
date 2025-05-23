@@ -71,6 +71,14 @@ body.dark-theme .hero-text h2 {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+.hero-photo {
+    width: 100%; /* Займає всю доступну ширину правого блоку */
+    height: auto; /* Зберігає пропорції */
+    object-fit: cover; /* Забезпечує заповнення без спотворення */
+    max-height: 80vh; /* Обмеження висоти, щоб не перевищувати екран */
+    border-radius: 10px; /* Опціонально, для округлих країв */
+}
+
 body.dark-theme .about h2,
 body.dark-theme .career h2,
 body.dark-theme .contact h2 {
@@ -466,6 +474,7 @@ body:not(.dark-theme) .mobile-nav a {
 .hero-image {
     flex: 1;
     text-align: right;
+    justify-content: flex-end;
 }
 
 .hero-image img {
@@ -800,6 +809,48 @@ form button {
     margin-top: 0.5rem; /* Відступ між "Адреса" і соціальними лінками */
 }
 
+/* Секція статистики */
+.stats {
+    padding: 4rem 0;
+    background-color: var(--background-color);
+    text-align: center;
+}
+
+.stat-item {
+    display: inline-block;
+    margin: 0 2rem;
+    background-color: #3588b2; /* Блакитний фон, як на зображенні */
+    color: #ffffff; /* Білий текст */
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-item p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.counter {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .stat-item {
+        display: block;
+        margin: 1rem auto;
+        width: 80%;
+    }
+}
+
+
 /* Футер */
 footer {
     background: var(--footer-bg);
@@ -910,6 +961,43 @@ body.dark-theme h3 {
         padding: 1.5rem;
     }
 }
+
+
+.thanks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('path-to-your-image.jpg'); /* Шлях до завантаженого зображення */
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: #333;
+}
+
+.thanks-container h1 {
+    font-size: 48px;
+}
+
+.thanks-container p {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+} */
 
 
 /* Анімація логотипу при першому завантаженні */
@@ -1133,8 +1221,18 @@ body.dark-theme h3 {
     }
 }
 
+@media (max-width: 768px) {
+    .stat-item {
+        display: block;
+        margin: 1rem auto;
+        width: 80%;
+    }
+}
+
+
 @media (min-width: 769px) and (max-width: 1024px) {
     .with-logo {
         background-size: 80px 32px; /* Менший розмір для планшетів */
     }
 }
+
