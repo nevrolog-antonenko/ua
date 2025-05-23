@@ -61,7 +61,7 @@ if (localStorage.getItem('theme') === 'dark') {
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Залишаємо, щоб контролювати поведінку вручну
+        e.preventDefault();
         const formData = new FormData(this);
         fetch(this.action, {
             method: 'POST',
@@ -71,20 +71,24 @@ if (contactForm) {
             }
         })
         .then(response => {
+            console.log('Response status:', response.status); // Логуємо статус відповіді
+            console.log('Response ok:', response.ok); // Логуємо, чи успішна відповідь
             if (response.ok) {
-                this.reset(); // Очищаємо форму перед редиректом
-                window.location.href = 'https://nevrolog-antonenko.github.io/ua/thanks.html'; // Редирект
+                this.reset();
+                console.log('Redirecting to thanks.html');
+                window.location.href = 'https://nevrolog-antonenko.github.io/ua/thanks.html';
             } else {
-                throw new Error('Помилка при відправці');
+                return response.json().then(err => {
+                    throw new Error(`Помилка при відправці: ${err.error || 'Невідома помилка'}`);
+                });
             }
         })
         .catch(error => {
             console.error('Помилка:', error);
-            alert('Сталася помилка при відправці. Спробуйте ще раз або зверніться пізніше.');
+            alert('Сталася помилка при відправці. Перевірте консоль для деталей.');
         });
     });
 }
-
 // Анімація логотипу при першому завантаженні
 document.addEventListener('DOMContentLoaded', function() {
     const logoAnimationContainer = document.getElementById('logoAnimationContainer');
