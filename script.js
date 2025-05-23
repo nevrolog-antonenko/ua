@@ -3,11 +3,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth' });
-        // Закрити мобільне меню після вибору
-        document.querySelector('.mobile-nav').classList.remove('active');
-        document.querySelector('.mobile-menu-toggle').classList.remove('open'); // Закриваємо іконку
-        document.body.style.overflow = 'auto';
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+            const mobileNav = document.querySelector('.mobile-nav');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            if (mobileNav && menuToggle) {
+                mobileNav.classList.remove('active');
+                menuToggle.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        }
     });
 });
 
@@ -15,72 +20,130 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const menuToggle = document.querySelector('.mobile-menu-toggle');
 const mobileNav = document.querySelector('.mobile-nav');
 
-menuToggle.addEventListener('click', () => {
-    mobileNav.classList.toggle('active');
-    menuToggle.classList.toggle('open'); // Додаємо/знімаємо клас для анімації іконки
-    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
-});
+if (menuToggle && mobileNav) {
+    menuToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+        menuToggle.classList.toggle('open');
+        document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+    });
+}
 
 // Обробка вкладок
 document.querySelectorAll('.tab-button').forEach(button => {
     button.addEventListener('click', () => {
-        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        const buttons = document.querySelectorAll('.tab-button');
+        const contents = document.querySelectorAll('.tab-content');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        contents.forEach(content => content.classList.remove('active'));
         button.classList.add('active');
-        document.getElementById(button.dataset.tab).classList.add('active');
+        const tabId = button.dataset.tab;
+        if (tabId) {
+            document.getElementById(tabId).classList.add('active');
+        }
     });
 });
 
 // Обробка перемикання теми
 const themeToggle = document.querySelector('.theme-toggle');
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-theme');
-    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-});
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+    });
+}
 
 // Завантаження збереженої теми
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-theme');
 }
 
-// Обробка форми
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Дякуємо за заявку! Ми зв’яжемося з вами найближчим часом.');
-    // Тут можна додати відправку даних форми на сервер
-    this.reset(); // Очистити форму
-});
+// Обробка форми з Formspree
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
 
+        // Додаткова перевірка перед відправкою
+        const formData = new FormData(this);
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Дякуємо за заявку! Ми зв’яжемося з вами найближчим часом.');
+                this.reset();
+            } else {
+                throw new Error('Помилка при відправці');
+            }
+        })
+        .catch(error => {
+            console.error('Помилка:', error);
+            alert('Сталася помилка при відправці. Спробуйте ще раз або зверніться пізніше.');
+        });
+    });
+}
 
-// === ЛОГІКА АНІМАЦІЇ ЛОГОТИПУ ПРИ ПЕРШОМУ ЗАВАНТАЖЕННІ ===
+// Анімація логотипу при першому завантаженні
 document.addEventListener('DOMContentLoaded', function() {
     const logoAnimationContainer = document.getElementById('logoAnimationContainer');
 
-    // Перевіряємо, чи користувач вже відвідував сайт (використовуючи sessionStorage)
-    if (sessionStorage.getItem('visited')) {
-        // Якщо вже відвідував, одразу приховуємо анімацію
-        if (logoAnimationContainer) { // Перевірка на існування елемента
+    if (logoAnimationContainer) {
+        if (sessionStorage.getItem('visited')) {
             logoAnimationContainer.style.display = 'none';
-            logoAnimationContainer.remove(); // Видаляємо елемент з DOM
-        }
-    } else {
-        // Якщо вперше, показуємо анімацію
-        if (logoAnimationContainer) { // Перевірка на існування елемента
-            logoAnimationContainer.style.display = 'flex'; // Переконайтеся, що це відображає контейнер
-            sessionStorage.setItem('visited', 'true'); // Зберігаємо позначку про відвідування
+            logoAnimationContainer.remove();
+        } else {
+            logoAnimationContainer.style.display = 'flex';
+            sessionStorage.setItem('visited', 'true');
 
-            // Запускаємо таймер, щоб приховати анімацію після завершення
             setTimeout(function() {
                 logoAnimationContainer.classList.add('hidden');
-                // Видаляємо елемент з DOM після повного зникнення,
-                // щоб він не заважав взаємодії з елементами під ним
                 setTimeout(function() {
-                    if (logoAnimationContainer) { // Перевірка на існування елемента перед видаленням
+                    if (logoAnimationContainer) {
                         logoAnimationContainer.remove();
                     }
-                }, 1000); // Час має відповідати transition в CSS (.logo-animation-container)
-            }, 2000); // 2000 мс = 2 секунди. Це тривалість анімації + невеликий запас.
-                      // Анімація img триває 1.5s, тому 2s дадуть їй повністю завершитися.
+                }, 1000);
+            }, 2000);
         }
     }
 });
+
+// Анімація лічильників
+function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText.replace('+', '');
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment) + (target > 999 ? '+' : '');
+                setTimeout(updateCount, 20);
+            } else {
+                counter.innerText = target + (target > 999 ? '+' : '');
+            }
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCount();
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (counter) {
+            observer.observe(counter);
+        }
+    });
+}
+
+// Виклик функції при завантаженні сторінки
+window.addEventListener('load', animateCounters);
