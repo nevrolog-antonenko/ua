@@ -969,7 +969,7 @@ body.dark-theme h3 {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url('path-to-your-image.jpg'); /* Шлях до завантаженого зображення */
+    background-image: url('img/thanks.jpeg'); /* Шлях до завантаженого зображення */
     background-size: cover;
     background-position: center;
     text-align: center;
