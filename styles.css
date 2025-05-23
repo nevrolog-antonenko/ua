@@ -1,0 +1,1140 @@
+@font-face {
+    font-family: 'Ukrainian Roadsign';
+    src: url('UkrainianRoadsign-Regular.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Ukrainian Roadsign';
+    src: url('UkrainianRoadsign-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Zvin Serif';
+    src: url('zvin/ZvinSerif-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Zvin Serif';
+    src: url('zvin/ZvinSerif-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* Світла тема */
+    --background: #e0fbfc;
+    --section-bg: #c2dfe3;
+    --card-bg: #ffffff;
+    --text-color: #253237;
+    --secondary-text: #5c6b73;
+    --accent-color: #3588b2;
+    --button-bg: #5c6b73;
+    --button-hover: #3d93b5;
+    --footer-bg: #253237;
+    --footer-text: #e0fbfc;
+    --shadow: 0 4px 10px rgba(37, 50, 55, 0.1);
+    --animation-duration: 0.8s;
+}
+
+body.dark-theme {
+    /* Темна тема */
+    --background: #253237;
+    --section-bg: #5c6b73;
+    --card-bg: #9db4c0;
+    --text-color: #e0fbfc;
+    --secondary-text: #c2dfe3;
+    --accent-color: #9db4c0;
+    --button-bg: #a3d5d9;
+    --button-hover: #5c6b73;
+    --footer-bg: #5c6b73;
+    --footer-text: #e0fbfc;
+    --shadow: 0 4px 10px rgba(224, 251, 252, 0.3);
+}
+/*  */
+
+body.dark-theme .hero-text h1 {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .hero-text h2 {
+    color: #f0f8ff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .about h2,
+body.dark-theme .career h2,
+body.dark-theme .contact h2 {
+    color: #f0f8ff; /* Світло-блакитний для контрасту */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Легка тінь для відокремлення */
+}
+
+body.dark-theme .btn {
+    background: #a3d5d9;
+    color: #253237;
+    border: 1px solid #e0fbfc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .btn:hover {
+    background: #87c1c6;
+    color: #ffffff;
+    border-color: #c2dfe3;
+}
+
+/*  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background);
+    color: var(--text-color);
+    font-family: 'Montserrat', serif;
+    overscroll-behavior: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(10px, 3vw, 20px);
+}
+
+.btn {
+    display: inline-block;
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
+    background: var(--button-bg);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 15px;
+    transition: background 0.3s;
+    font-family: 'Ukrainian Roadsign', 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.btn:hover {
+    background: var(--button-hover);
+}
+
+/* Шапка */
+header {
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-radius: 0 0 15px 15px;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(10px, 3vw, 15px);
+    background: var(--card-bg);
+    border-radius: 15px;
+}
+
+.logo a {
+    display: inline-block;
+}
+
+.logo-img {
+    width: clamp(90px, 20vw, 130px);
+    height: clamp(40px, 7vw, 60px);
+    object-fit: contain;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* Десктопне меню */
+.desktop-nav ul {
+    list-style: none;
+    display: flex;
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.desktop-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem);
+    border-radius: 10px;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+    font-family: 'Ukrainian Roadsign', 'Montserrat', sans-serif;
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    position: relative;
+}
+
+.desktop-nav a:hover {
+    background: var(--accent-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    bottom: -2px;
+    left: 50%;
+    transition: width 0.3s, left 0.3s;
+}
+
+.desktop-nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Перемикання теми */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.theme-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: var(--text-color);
+}
+
+.theme-toggle .moon-icon {
+    display: none;
+}
+
+body.dark-theme .theme-toggle .moon-icon {
+    display: block;
+}
+
+body.dark-theme .theme-toggle .sun-icon {
+    display: none;
+}
+
+/* Соціальні посилання */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    stroke: var(--accent-color);
+}
+
+header .social-links {
+    margin-right: 1rem;
+}
+
+footer .social-links {
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+
+/* Мобільне меню */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 2001;
+}
+
+.hamburger-icon {
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    position: relative;
+    display: block;
+    transition: background 0.3s;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: var(--text-color);
+    transition: transform 0.3s ease, background 0.3s;
+}
+
+.hamburger-icon::before {
+    top: -8px;
+}
+
+.hamburger-icon::after {
+    top: 8px;
+}
+
+.mobile-menu-toggle:hover .hamburger-icon,
+.mobile-menu-toggle:hover .hamburger-icon::before,
+.mobile-menu-toggle:hover .hamburger-icon::after {
+    background: var(--accent-color);
+}
+
+.mobile-menu-toggle.open .hamburger-icon {
+    background: transparent; /* Прибираємо середню лінію */
+}
+
+.mobile-menu-toggle.open .hamburger-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+    background: var(--accent-color);
+}
+
+.mobile-menu-toggle.open .hamburger-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+    background: var(--accent-color);
+}
+
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.5); /* Напівпрозорий фон */
+    backdrop-filter: blur(10px); /* Ефект блюру як в iPhone */
+    transform: translateX(-100%); /* Початкова позиція зліва */
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out, visibility 0.7s ease-in-out; /* Плавна анімація */
+}
+
+.mobile-nav.active {
+    transform: translateX(0); /* Вилітає зліва */
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav-logo {
+    padding: clamp(1rem, 2vh, 1.5rem);
+    text-align: left;
+}
+
+.mobile-logo-img {
+    width: clamp(90px, 20vw, 120px);
+    height: auto;
+    object-fit: contain;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: clamp(2rem, 5vh, 1.53rem);
+    width: 70%;
+    height: 80%;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    border-radius: 15px;
+}
+
+.mobile-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-family: 'Ukrainian Roadsign', 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: clamp(0.5rem, 1.5vh, 1rem);
+    display: block;
+    transition: color 0.3s, transform 0.2s, background 0.3s;
+    border-radius: 10px;
+}
+
+.mobile-nav a:hover {
+    color: #fff;
+    background: var(--accent-color);
+    transform: scale(1.05);
+}
+
+/* Зміна кольору тексту в світлій темі */
+body:not(.dark-theme) .mobile-nav a {
+    color: #ffffff; /* Білий колір у світлій темі */
+}
+
+/* Анімація fade-in-up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero, .about, .career, .contact {
+    animation: fadeInUp var(--animation-duration) ease-out both;
+    animation-delay: 0.2s;
+}
+
+/* Герой */
+.hero {
+    padding: clamp(3rem, 6vh, 6rem) 0 clamp(1.5rem, 3vh, 3rem);
+    background: var(--section-bg);
+    border-radius: 15px;
+    margin: clamp(0.5rem, 1vw, 1rem);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    background: var(--card-bg);
+    padding: clamp(1rem, 2vw, 2rem);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left;
+    width: 100%; /* Забезпечуємо максимальну ширину */
+    max-width: 600px; /* Збільшуємо максимальну ширину для десктопів */
+}
+
+.hero-text h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 900;
+}
+
+.hero-text h2 {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--secondary-text);
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+    white-space: nowrap; /* Запобігаємо переносу тексту */
+    overflow: hidden; /* Ховаємо текст, якщо він виходить за межі */
+    text-overflow: ellipsis; /* Додаємо три крапки, якщо текст обрізається */
+}
+
+.hero-image {
+    flex: 1;
+    text-align: right;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    max-height: 400px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+/* Про мене */
+.about {
+    padding: clamp(2rem, 5vh, 3rem) 0;
+    background: var(--card-bg);
+    border-radius: 15px;
+    margin: clamp(0.5rem, 1vw, 1rem);
+}
+
+.about h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+}
+
+.about p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--section-bg);
+    border-radius: 15px;
+    font-family: 'Montserrat', serif;
+}
+
+.facts {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.facts li {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    background: var(--accent-color);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-family: 'Montserrat', serif;
+}
+
+/* Кар’єра */
+.career {
+    padding: clamp(2rem, 5vh, 3rem) 0;
+    background: var(--section-bg);
+    border-radius: 15px;
+    margin: clamp(0.5rem, 1vw, 1rem);
+}
+
+.career h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+    white-space: nowrap; /* Запобігаємо переносу тексту */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    padding: 0.5rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Ukrainian Roadsign', 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--accent-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+.tab-button.active {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.tab-button:hover {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background: var(--accent-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+.timeline-item {
+    padding: 1rem;
+    position: relative;
+    background: var(--card-bg);
+    margin: 1rem 0;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    width: 45%;
+}
+
+.timeline-item:nth-child(odd) {
+    margin-left: 55%;
+}
+
+.timeline-item:nth-child(even) {
+    margin-right: 55%;
+}
+
+.year {
+    font-weight: 600;
+    color: var(--accent-color);
+    display: block;
+    margin-bottom: 0.5rem;
+    background: var(--section-bg);
+    padding: 0.3rem 0.6rem;
+    border-radius: 10px;
+    font-family: 'Ukrainian Roadsign', 'Montserrat', sans-serif;
+}
+
+.timeline-item p {
+    font-family: 'Montserrat', serif;
+}
+
+.career .btn {
+    display: block;
+    margin: 2rem auto 0;
+    text-align: center;
+}
+
+
+/* Професійний напрямок */
+
+.proff {
+    padding: clamp(2rem, 5vh, 3rem) 0;
+    background: var(--card-bg);
+    border-radius: 15px;
+    margin: clamp(0.5rem, 1vw, 1rem);
+    backdrop-filter: blur(10px);
+    animation: fadeInUp var(--animation-duration) ease-out both;
+    animation-delay: 0.2s;
+}
+
+.proff h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+}
+
+.proff-block {
+    margin-bottom: 2rem;
+    background: var(--section-bg);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    position: relative; /* Для правильного позиціонування псевдоелемента */
+    color: var(--text-color); /* Гарантуємо, що текст видно */
+}
+
+
+
+.proff-block.with-logo::after {
+    content: '';
+    position: absolute;
+    right: 10px; /* Строго в правому куті */
+    bottom: 10px; /* Строго в нижньому куті */
+    width: 120px;
+    height: 200px;
+    background-image: url('img/dr-antonenko-logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right bottom; /* Додаткове уточнення */
+    opacity: 0.6;
+    z-index: 0;
+}
+
+
+
+.proff-block h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+}
+
+.proff-block p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', serif;
+    color: var(--text-color);
+}
+
+.proff-block ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.proff-block ul li {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    font-family: 'Montserrat', serif;
+    position: relative;
+    color: var(--text-color);
+}
+
+.proff-block ul li::before {
+    content: '•';
+    color: var(--accent-color);
+    position: absolute;
+    left: -1rem;
+}
+
+.proff-block .btn {
+    display: block;
+    margin: 1rem auto 0;
+    text-align: center;
+}
+
+/* Контакти */
+.contact {
+    padding: clamp(2rem, 5vh, 3rem) 0;
+    background: var(--card-bg);
+    border-radius: 15px;
+    margin: clamp(0.5rem, 1vw, 1rem);
+}
+
+.contact h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--section-bg);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+form input {
+    padding: 0.75rem;
+    border: 1px solid var(--secondary-text);
+    border-radius: 12px;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-family: 'Montserrat', serif;
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+form button {
+    background: var(--button-bg);
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.contact-info {
+    margin-top: 1.5rem;
+    text-align: center;
+    background: var(--section-bg);
+    padding: 1rem;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Відступ між рядками */
+}
+
+.contact-info p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    margin: 0;
+    font-family: 'Montserrat', serif;
+}
+
+.contact-info .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Відступ між іконками */
+    margin-top: 0.5rem; /* Відступ між "Адреса" і соціальними лінками */
+}
+
+/* Футер */
+footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 1rem 0;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+    margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+footer p {
+    font-family: 'Montserrat', serif;
+}
+
+
+
+/* Футер */
+footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 1rem 0;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+    margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+footer p {
+    font-family: 'Montserrat', serif;
+}
+
+
+
+/* Секція збору донатів */
+
+body.dark-theme h2,
+body.dark-theme h3 {
+    color: #ffffff; /* Білий колір для темної теми */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Тінь для виділення тексту */
+    transition: color 0.3s, text-shadow 0.3s; /* Плавна зміна */
+}
+
+.donate {
+    padding: 4rem 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+}
+
+.donate-intro {
+    margin-bottom: 3rem;
+}
+
+.donate-intro h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.donate-intro p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.donate-block {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.donate-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.donate-block h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.donate-block p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Адаптивність для менших екранів */
+@media (max-width: 768px) {
+    .donate-intro h2 {
+        font-size: 2rem;
+    }
+
+    .donate-intro p {
+        font-size: 1rem;
+    }
+
+    .donate-block h3 {
+        font-size: 1.5rem;
+    }
+
+    .donate-block p {
+        font-size: 0.9rem;
+    }
+
+    .donate-block {
+        padding: 1.5rem;
+    }
+}
+
+
+/* Анімація логотипу при першому завантаженні */
+.logo-animation-container {
+    position: fixed; /* Фіксоване позиціонування, щоб перекривати весь вміст */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Білий фон, або колір, що відповідає вашому дизайну */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Високий z-index, щоб бути над усім */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-out, visibility 1s ease-out; /* Плавний перехід при зникненні */
+}
+
+.logo-animation-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.logo-animation-container img {
+    max-width: 80%; /* Щоб логотип не виходив за межі екрану */
+    max-height: 80vh; /* Щоб логотип не виходив за межі екрану по висоті */
+    opacity: 0; /* Початкова непрозорість 0 для плавного з'явлення */
+    transform: scale(0.8); /* Початковий розмір трохи менший */
+    animation: fadeInScale 1.5s ease-out forwards; /* Назва анімації, тривалість, функція часу, збереження кінцевого стану */
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Адаптивність */
+@media (max-width: 1024px) {
+    .hero-text h1 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .hero-text h2 {
+        font-size: clamp(1rem, 2.2vw, 1.3rem);
+    }
+
+    .hero-content {
+        padding: clamp(1rem, 2vw, 1.5rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        width: clamp(100px, 20vw, 150px);
+        height: clamp(40px, 8vw, 60px);
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    header .container {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .theme-toggle {
+        order: 1;
+    }
+
+    .mobile-menu-toggle {
+        order: 2;
+    }
+
+    .hero {
+        padding: clamp(2rem, 5vh, 4rem) 0 clamp(1rem, 2vh, 2rem);
+        margin: 0.5rem;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 15px;
+    }
+
+    .hero-text, .hero-image {
+        flex: none;
+        width: 100%;
+    }
+
+    .hero-image {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .hero-image img {
+        max-height: 300px;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        margin-left: 40px !important;
+        margin-right: 10px !important;
+        border-radius: 12px;
+    }
+
+    .about, .career, .contact {
+        padding: clamp(2rem, 5vh, 3rem) 0;
+        background: var(--card-bg);
+        border-radius: 15px;
+        margin: clamp(0.5rem, 1vw, 1rem);
+    }
+
+    .facts {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        width: clamp(100px, 20vw, 150px);
+        height: clamp(40px, 8vw, 60px);
+    }
+
+    .btn {
+        padding: clamp(0.4rem, 1vw, 0.5rem) clamp(0.8rem, 2vw, 1rem);
+        font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    }
+
+    .hero-text h1 {
+        font-size: clamp(1.7rem, 3.7vw, 2.1rem);
+    }
+
+    .hero-text h2 {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .about h2, .career h2, .contact h2 {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+    }
+
+    form {
+        padding: 1rem;
+    }
+
+    .contact-info p {
+        font-size: clamp(0.8rem, 1.8vw, 1rem);
+    }
+
+    .mobile-nav a {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-image img {
+        max-height: 250px;
+    }
+}
+
+/* Адаптивність для .proff */
+@media (max-width: 768px) {
+    .proff {
+        padding: clamp(1.5rem, 4vh, 2.5rem) 0;
+        margin: 0.5rem;
+    }
+
+    .proff-block {
+        padding: 1rem;
+    }
+
+    .proff-block.with-logo::after {
+        display: block; /* Відображаємо логотип на мобільних */
+        width: 80px; /* Зменшуємо розмір для мобільних (можна змінити) */
+        height: 32px; /* Зменшуємо розмір для мобільних (можна змінити) */
+        opacity: 0.4; /* Більша прозорість для мобільних (можна змінити) */
+    }
+
+    .proff h2 {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+    }
+
+    .proff-block h3 {
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .proff-block ul li {
+        font-size: clamp(0.8rem, 1.8vw, 1rem);
+    }
+
+    .proff-block p {
+        font-size: clamp(0.8rem, 1.8vw, 1rem);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .with-logo {
+        background-size: 80px 32px; /* Менший розмір для планшетів */
+    }
+}
